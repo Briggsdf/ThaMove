@@ -7,8 +7,11 @@ import com.parse.ParseUser;
  */
 public class MoveUser extends ParseUser {
 
-    int age;
-    String college;
+    private static final String MOVEUSER_AGE = "Age";
+    private static final String MOVEUSER_MUSICPREF ="MusicPref";
+
+    private  int age;
+    private  String college;
 
 
     public MoveUser(){
@@ -19,13 +22,13 @@ public class MoveUser extends ParseUser {
 
         this.setPassword(password);
         this.setUsername(username);
-
     }
 
     public MoveUser(String username, String password,int age, String College){
 
         this.setPassword(password);
         this.setUsername(username);
+        this.put(MOVEUSER_AGE,age);
 
     }
 

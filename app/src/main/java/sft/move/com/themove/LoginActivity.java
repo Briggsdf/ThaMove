@@ -1,14 +1,19 @@
 package sft.move.com.themove;
 
+import android.location.GpsSatellite;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
 import com.parse.Parse;
+import com.parse.ParseFile;
 import com.parse.ParseObject;
 
 public class LoginActivity extends AppCompatActivity {
+
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
