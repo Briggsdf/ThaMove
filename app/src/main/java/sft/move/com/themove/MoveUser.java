@@ -1,10 +1,12 @@
 package sft.move.com.themove;
 
+import com.parse.ParseClassName;
 import com.parse.ParseUser;
 
 /**
  * Created by De'Rio on 10/3/2015.
  */
+@ParseClassName("_User")
 public class MoveUser extends ParseUser {
 
     private static final String MOVEUSER_AGE = "Age";
@@ -24,8 +26,8 @@ public class MoveUser extends ParseUser {
         this.setUsername(username);
     }
 
-    public MoveUser(String username, String password,int age, String College){
-
+    public MoveUser(String username, String password,String email,int age, String College){
+        this.setEmail(email);
         this.setPassword(password);
         this.setUsername(username);
         this.put(MOVEUSER_AGE,age);

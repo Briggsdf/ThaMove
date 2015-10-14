@@ -1,27 +1,82 @@
 package sft.move.com.themove;
 
+import android.content.Context;
+import android.content.Intent;
 import android.location.GpsSatellite;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
 
+import com.parse.LogInCallback;
 import com.parse.Parse;
 import com.parse.ParseFile;
 import com.parse.ParseObject;
+import com.parse.ParseUser;
+import com.squareup.picasso.Picasso;
+
+import java.text.ParseException;
 
 public class LoginActivity extends AppCompatActivity {
 
+    private EditText etPassword;
+    private EditText etUsername;
+    private Button btnRegister;
+    private Button btnLogin;
 
+
+
+    public void goToRegisterScreen(View v){
+        Intent registerScreenIntent = new Intent(this, RegisterActivity.class);
+        startActivity(registerScreenIntent);
+
+
+    }
+
+    public void loginMoveUser(View v){
+        String password = MoveHelper.getStringFromEditText(etPassword);
+        String username = MoveHelper.getStringFromEditText(etUsername);
+        MoveUser mv= new MoveUser();
+        if(password==null||username==null){
+           Toast t = Toast.makeText(this,"Username/Password cannot be blank",Toast.LENGTH_SHORT);
+            t.show();
+        }
+        else{
+            mv.logInInBackground(username, password, new LogInCallback(){
+                @Override
+                public void done(ParseUser user, com.parse.ParseException e) {
+                    if (e == null && user != null) {
+                        Intent mainActivityIntent = new Intent(getApplicationContext(), MainActivity.class);
+                        startActivity(mainActivityIntent);
+
+                    } else if (user == null) {
+                        Toast t = Toast.makeText(getApplicationContext(),"Username or Password is Invalid, please re-enter your credentials!",Toast.LENGTH_SHORT);
+                        t.show();
+                    } else {
+                        Toast t = Toast.makeText(getApplicationContext(),"Error: "+e.getLocalizedMessage(),Toast.LENGTH_SHORT);
+                        t.show();
+                    }
+                }
+            });
+        }
+
+    }
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        Parse.enableLocalDatastore(this);
         Parse.initialize(this, "FewEue7br14gf1yPQi6xn79zAFXmU7ceSSIJjF0D", "QUera4MIlcLPs1SVoZXgH43g5sS0qOx5ARl1PWAP");
+        ParseUser.registerSubclass(MoveUser.class);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-
+        etUsername =(EditText)findViewById(R.id.etUsername);
+        etPassword =(EditText)findViewById(R.id.etPassword);
+        btnLogin = (Button)findViewById(R.id.btnLogin);
+        btnRegister = (Button)findViewById(R.id.btnRegister);
 
     }
 
