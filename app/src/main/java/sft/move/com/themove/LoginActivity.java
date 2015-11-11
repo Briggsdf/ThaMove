@@ -27,7 +27,7 @@ public class LoginActivity extends AppCompatActivity {
     private EditText etUsername;
     private Button btnRegister;
     private Button btnLogin;
-
+    private MoveUser mv;
 
 
     public void goToRegisterScreen(View v){
@@ -40,7 +40,7 @@ public class LoginActivity extends AppCompatActivity {
     public void loginMoveUser(View v){
         String password = MoveHelper.getStringFromEditText(etPassword);
         String username = MoveHelper.getStringFromEditText(etUsername);
-        MoveUser mv= new MoveUser();
+        mv= new MoveUser();
         if(password==null||username==null){
            Toast t = Toast.makeText(this,"Username/Password cannot be blank",Toast.LENGTH_SHORT);
             t.show();
@@ -52,7 +52,7 @@ public class LoginActivity extends AppCompatActivity {
                     if (e == null && user != null) {
                         Intent mainActivityIntent = new Intent(getApplicationContext(), MainActivity.class);
                         startActivity(mainActivityIntent);
-
+                        finish();
                     } else if (user == null) {
                         Toast t = Toast.makeText(getApplicationContext(),"Username or Password is Invalid, please re-enter your credentials!",Toast.LENGTH_SHORT);
                         t.show();
@@ -69,14 +69,21 @@ public class LoginActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        Parse.initialize(this, "FewEue7br14gf1yPQi6xn79zAFXmU7ceSSIJjF0D", "QUera4MIlcLPs1SVoZXgH43g5sS0qOx5ARl1PWAP");
-        ParseUser.registerSubclass(MoveUser.class);
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        ParseUser.registerSubclass(MoveUser.class);
         etUsername =(EditText)findViewById(R.id.etUsername);
         etPassword =(EditText)findViewById(R.id.etPassword);
         btnLogin = (Button)findViewById(R.id.btnLogin);
         btnRegister = (Button)findViewById(R.id.btnRegister);
+
+         if( ParseUser.getCurrentUser()!=null){
+             Intent mainActivityIntent = new Intent(this, MainActivity.class);
+             startActivity(mainActivityIntent);
+             finish();
+
+         }
 
     }
 

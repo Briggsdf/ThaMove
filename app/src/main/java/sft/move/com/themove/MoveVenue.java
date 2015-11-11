@@ -8,7 +8,7 @@ import java.util.List;
  * Created by De'Rio on 9/24/2015.
  */
 @ParseClassName("MoveVenue")
-public abstract class MoveVenue extends ParseObject {
+public  class MoveVenue extends ParseObject {
 
     private static final String MOVEVENUE_NAME = "Name";
     private static final String MOVEVENUE_DRESSCODE = "DressCode";
@@ -18,6 +18,18 @@ public abstract class MoveVenue extends ParseObject {
     private List<String> venueEvents;
     private Boolean dressCode;
     private ParseFile venuePicture;
+    private int movePoints;
+
+    public MoveVenue(ParseObject po){
+        venuePicture = po.getParseFile(MOVEVENUE_PICTURE);
+        venueName = po.getString(MOVEVENUE_NAME);
+
+
+    }
+
+    public  MoveVenue(){
+
+    }
 
     public Boolean getDressCode() {
 
@@ -29,7 +41,7 @@ public abstract class MoveVenue extends ParseObject {
     }
 
     public String getVenueName() {
-        return this.getString(MOVEVENUE_NAME);
+        return venueName;
     }
 
     public void setVenueName(String venueName) {
@@ -45,7 +57,7 @@ public abstract class MoveVenue extends ParseObject {
     }
 
     public ParseFile getVenuePicture() {
-        return this.getParseFile(MOVEVENUE_PICTURE);
+        return venuePicture;
     }
 
     public void setVenuePicture(ParseFile venuePicture) {

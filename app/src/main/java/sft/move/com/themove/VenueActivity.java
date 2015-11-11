@@ -1,22 +1,27 @@
 package sft.move.com.themove;
 
+import android.media.Image;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ImageView;
 
 import com.parse.Parse;
 
 public class VenueActivity extends AppCompatActivity {
 
+    private ImageView venueBanner;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        Parse.enableLocalDatastore(this);
 
-        Parse.initialize(this, "FewEue7br14gf1yPQi6xn79zAFXmU7ceSSIJjF0D", "QUera4MIlcLPs1SVoZXgH43g5sS0qOx5ARl1PWAP");
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_venue);
+        venueBanner = (ImageView)findViewById(R.id.v_pic);
+
+
     }
 
     @Override
