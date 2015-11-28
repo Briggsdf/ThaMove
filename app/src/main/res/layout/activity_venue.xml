@@ -7,9 +7,9 @@
     tools:context="sft.move.com.themove.VenueActivity">
     <ImageView
         android:scaleType="centerCrop"
-        android:layout_height="200dp"
+        android:layout_height="400dp"
         android:id="@+id/v_pic"
-        android:layout_width="match_parent">
+        android:layout_width="fill_parent">
     </ImageView>
     <ScrollView
         android:layout_width="match_parent"
